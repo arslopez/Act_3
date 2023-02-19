@@ -132,10 +132,11 @@ def AnchoImagen():
 def GSD():
     alturavuelo=float(enalvuelo.entry())
     focalcamara=float(enfocal.entry())
-    anchosensor=float(enAncho.entry())
+    anchosensor=float(enAnchoS.entry())
     anchoi=AnchoImagen()
     RSI=anchosensor/anchoi
     gsd=(alturavuelo/focalcamara)*RSI
+    return gsd
 
 def altoImagen():
     altoS=float(enAltoS.entry())
@@ -147,7 +148,7 @@ def baseArea():
     anchoI=AnchoImagen()
     solLon=float(enSolL.entry())
     baseA=anchoI*(1-(solLon/100))
-    return BaseA
+    return baseA
 
 def distpasada():
     altoI=altoImagen()
