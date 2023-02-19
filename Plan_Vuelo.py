@@ -11,7 +11,7 @@ import tkinter as tk #importar tkinter
 #Crear una ventana visible con tkinter
 
 ventana = tk.Tk()
-ventana.geometry("800x600")
+ventana.geometry("1000x800")
 
 ##Añadir color al fondo
 ventana.config(bg='blue')
@@ -19,8 +19,8 @@ ventana.config(bg='blue')
 #Agregar etiquetas a la ventana
 
 # 
-etitulo = tk.Label(ventana, text='PLAN DE VUELO', bg='black',  fg='white')
-etitulo.grid(row = 0, column = 6)
+etitulo = tk.Label(ventana, text='PLAN DE VUELO', font= 'Helvetica 20',  bg='black',  fg='white')
+etitulo.grid(row = 0, column = 1)
 
 ##############################################################################
 
@@ -106,6 +106,23 @@ eLargP.grid(row = 55, column = 1)
 
 enLargP = tk.Entry(ventana, font= 'Helvetica 15', justify = 'center')
 enLargP.grid(row = 55, column = 4)
+
+
+#################################################
+#Resultado de medición
+textResult = tk.Text(ventana)
+textResult.grid(row = 60, column = 4, columnspan = 2)
+
+
+#Añadir Botón
+
+botonDiv = tk.Button(text = "CALCULAR", font= 'Helvetica 20')
+botonDiv.grid(row = 10, column = 5)
+
+
+##Añadir un título a la ventana
+ventana.title("PLAN DE VUELO LCTIG")
+
 
 
 
