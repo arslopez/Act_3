@@ -114,10 +114,77 @@ textResult = tk.Text(ventana)
 textResult.grid(row = 60, column = 4, columnspan = 2)
 
 
-#Añadir Botón
+#######################################################3
+'Funciones que permitiran el uso adecuado del programa'
+    
+def escalaVuelo():
+    focalcamara=float(enfocal.entry())
+    alturavuelo=float(enalvuelo.entry())
+    escalaV=1/((focalcamara/1000)/alturavuelo)
+    return escalaV
 
-botonDiv = tk.Button(text = "CALCULAR", font= 'Helvetica 20')
-botonDiv.grid(row = 10, column = 5)
+def AnchoImagen():
+    anchosensor=float(enAnchoS.entry())
+    escalaV=escalaVuelo()
+    anchoImagen=(anchosensor*escalaV)/1000
+    return anchoImagen    
+    
+def GSD():
+    alturavuelo=float(enalvuelo.entry())
+    focalcamara=float(enfocal.entry())
+    anchosensor=float(enAncho.entry())
+    anchoi=AnchoImagen()
+    RSI=anchosensor/anchoi
+    gsd=(alturavuelo/focalcamara)*RSI
+
+def altoImagen():
+    altoS=float(enAltoS.entry())
+    escalaV=escalaVuelo()
+    altoImagen=altoS*escalaV
+    return altoImagen
+    
+def baseArea():
+    anchoI=AnchoImagen()
+    solLon=float(enSolL.entry())
+    baseA=anchoI*(1-(solLon/100))
+    return BaseA
+
+def distpasada():
+    altoI=altoImagen()
+    solT=float(enSolT.entry())
+    distP=altoI*(1-(solT/100))
+    return distP
+
+def tiempofotos():
+    tiempoF=baseArea()/float(enVelo.entry())
+    return tiempoF
+
+def nPasadas():
+    nPas=float(enAncP.entry())/distpasada()
+    return nPas
+
+def nfotosPas():
+    nfotos=float(eLargP.entry())/baseArea()
+    return nfotos
+
+def nfotosvu():
+    nfotoV=nfotosPas()*nPasadas()
+    return nfotoV
+
+def distvuelo():
+    dv=(nPasadas()*float(enLarP.entry()))+ float(enAncP.entry())
+    return dv
+
+def duracionvuelo:
+    duracV=(nfotosvu()*tiempofotos())/60
+    return duracV
+
+    
+
+
+#Añadir Botón
+botonRes = tk.Button(text = "CALCULAR", font= 'Helvetica 20')
+botonRes.grid(row = 10, column = 5)
 
 
 ##Añadir un título a la ventana
