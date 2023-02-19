@@ -175,7 +175,7 @@ def distvuelo():
     dv=(nPasadas()*float(enLarP.entry()))+ float(enAncP.entry())
     return dv
 
-def duracionvuelo:
+def duracionvuelo():
     duracV=(nfotosvu()*tiempofotos())/60
     return duracV
 
