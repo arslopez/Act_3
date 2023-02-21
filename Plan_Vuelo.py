@@ -181,6 +181,7 @@ def duracionvuelo():
     return duracV
 
 def imprimir():
+    textResult.delete(1.0, tk.END)
     gsd=GSD()
     escalaV=escalaVuelo()
     anchoI=AnchoImagen()
