@@ -118,54 +118,54 @@ textResult.grid(row = 60, column = 4, columnspan = 2)
 'Funciones que permitiran el uso adecuado del programa'
     
 def escalaVuelo():
-    focalcamara=float(enfocal.entry())
-    alturavuelo=float(enalvuelo.entry())
+    focalcamara= float(enfocal.get())
+    alturavuelo=float(enalvuelo.get())
     escalaV=1/((focalcamara/1000)/alturavuelo)
     return escalaV
 
 def AnchoImagen():
-    anchosensor=float(enAnchoS.entry())
+    anchosensor=float(enAnchoS.get())
     escalaV=escalaVuelo()
     anchoImagen=(anchosensor*escalaV)/1000
     return anchoImagen    
     
 def GSD():
-    alturavuelo=float(enalvuelo.entry())
-    focalcamara=float(enfocal.entry())
-    anchosensor=float(enAnchoS.entry())
+    alturavuelo= float(enalvuelo.get())
+    focalcamara=float(enfocal.get())
+    anchosensor=float(enAnchoS.get())
     anchoi=AnchoImagen()
     RSI=anchosensor/anchoi
     gsd=(alturavuelo/focalcamara)*RSI
     return gsd
 
 def altoImagen():
-    altoS=float(enAltoS.entry())
+    altoS=float(enAltoS.get())
     escalaV=escalaVuelo()
     altoImagen=altoS*escalaV
     return altoImagen
     
 def baseArea():
     anchoI=AnchoImagen()
-    solLon=float(enSolL.entry())
+    solLon=float(enSolL.get())
     baseA=anchoI*(1-(solLon/100))
     return baseA
 
 def distpasada():
     altoI=altoImagen()
-    solT=float(enSolT.entry())
+    solT=float(enSolT.get())
     distP=altoI*(1-(solT/100))
     return distP
 
 def tiempofotos():
-    tiempoF=baseArea()/float(enVelo.entry())
+    tiempoF=baseArea()/float(enVelo.get())
     return tiempoF
 
 def nPasadas():
-    nPas=float(enAncP.entry())/distpasada()
+    nPas=float(enAncP.get())/distpasada()
     return nPas
 
 def nfotosPas():
-    nfotos=float(eLargP.entry())/baseArea()
+    nfotos=float(enLargP.get())/baseArea()
     return nfotos
 
 def nfotosvu():
@@ -173,18 +173,38 @@ def nfotosvu():
     return nfotoV
 
 def distvuelo():
-    dv=(nPasadas()*float(enLarP.entry()))+ float(enAncP.entry())
+    dv=(nPasadas()*float(enLarP.get()))+ float(enAncP.get())
     return dv
 
 def duracionvuelo():
     duracV=(nfotosvu()*tiempofotos())/60
     return duracV
 
+def imprimir():
+    gsd=GSD()
+    escalaV=escalaVuelo()
+    anchoI=AnchoImagen()
+    altoima=altoImagen()
+    base=baseArea()
+    distP=distpasada()
+    velo=enVelo.get()
+    time=tiempofotos()
+    nPas=nPasadas()
+    nFot=nfotosPas()
+    nfotv=nfotosvu()
+    disvu=distvuelo()
+    dura=duracionvuelo()
+    impresion=f'Este es el resultado del plan del vuelo \n ########### \n GSD = {gsd} \n Escala de Vuelo=  {escalaV}\n Ancho de Imagen del terreno={anchoI}\n'\
+         f' Alto de Imagen sobre el Terreno={altoima} \n Base Aerea={base} \n Distancia entre pasadas={distP} \n Velocidad en vuelo={velo} m/s \n' \
+             f' Tiempo entre fotos={time} s\n Número de pasadas= {nPas}\n Numero de fotos por pasada= {nFot} \n Numero de por vuelo= {nfotv}\n Distancia de vuelo= {disvu} \n Duracion de vuelo= {dura}'    
+    textResult.insert(tk.END, impresion)
+    
+
     
 
 
 #Añadir Botón
-botonRes = tk.Button(text = "CALCULAR", font= 'Helvetica 20')
+botonRes = tk.Button(text = "CALCULAR", font= 'Helvetica 20', command=imprimir)
 botonRes.grid(row = 10, column = 5)
 
 
